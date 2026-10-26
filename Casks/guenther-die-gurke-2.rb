@@ -17,20 +17,23 @@ cask "guenther-die-gurke-2" do
 
   app "Günther die Gurke 2.app"
 
+  # Ad-hoc signed, not notarized, so Gatekeeper would stop the app after every install and
+  # upgrade. Lifting the quarantine for this one app is not Homebrew's recommended way (that is
+  # notarization); it stays until the app is notarized. The sha256 above pins the dmg.
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args: ["-dr", "com.apple.quarantine", "{{appdir}}/Günther die Gurke 2.app"]
+  end
+
   zap trash: [
     "~/Library/Application Support/Godot/app_userdata/Günther die Gurke 2",
     "~/Library/Saved Application State/eu.kinsoft.guenthergurke2.savedState",
   ]
 
   caveats <<~EOS
-    Die App ist nicht von Apple geprüft. Beim ersten Start und nach jedem Update
-    hält macOS sie deshalb an:
-      1. Die App einmal öffnen und die Meldung schließen.
-      2. Systemeinstellungen → Datenschutz & Sicherheit → „Dennoch öffnen“,
-         dann mit dem Passwort bestätigen.
-    Unter macOS 14 reicht auch: Rechtsklick auf die App → „Öffnen“.
-
-    Alternativ im Terminal (hebt die Sperre nur für diese App auf):
-      xattr -dr com.apple.quarantine "/Applications/Günther die Gurke 2.app"
+    Die App ist nicht von Apple notarisiert. Damit sie ohne Freigabe in den
+    Systemeinstellungen startet, entfernt der Cask nach Installation und Update
+    die Quarantäne-Markierung von macOS, nur für diese App. Das ist nicht der
+    von Homebrew empfohlene Weg.
   EOS
 end
