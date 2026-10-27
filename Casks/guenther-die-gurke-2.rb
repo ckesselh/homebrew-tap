@@ -1,6 +1,6 @@
 cask "guenther-die-gurke-2" do
-  version "0.1.2"
-  sha256 "cbf1a052308805d80d88b2673bb069910f45244769bf04bbbb93925d49601ffb"
+  version "0.1.3"
+  sha256 "357446cccca97d18af160b42f9c14fd0dc764ea6dbcd1ee62f4027e598bf6d60"
 
   url "https://github.com/ckesselh/guenther-die-gurke-2-download/releases/download/v#{version}/GuentherDieGurke2-v#{version}-macos.dmg"
   name "Günther die Gurke 2"
