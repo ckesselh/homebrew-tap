@@ -27,7 +27,7 @@ cask "guenther-die-gurke-2" do
 
   zap trash: [
     "~/Library/Application Support/Godot/app_userdata/Günther die Gurke 2",
-    "~/Library/Saved Application State/eu.kinsoft.guenthergurke2.savedState",
+    "~/Library/Saved Application State/io.github.ckesselh.guenthergurke2.savedState",
   ]
 
   caveats <<~EOS
